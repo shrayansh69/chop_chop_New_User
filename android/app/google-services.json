@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "8363231662",
+    "project_id": "chop-chop-pvt-ltd-6eed9",
+    "storage_bucket": "chop-chop-pvt-ltd-6eed9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8363231662:android:c7f2cdcfd5b1da73e5203f",
+        "android_client_info": {
+          "package_name": "com.example.cl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQQlyRBEMnxPtoE7JBaZUMFlnnykJTS7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8363231662:android:e7020e11806525bae5203f",
+        "android_client_info": {
+          "package_name": "com.vgtpl.cl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQQlyRBEMnxPtoE7JBaZUMFlnnykJTS7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
