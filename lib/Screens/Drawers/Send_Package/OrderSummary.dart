@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cl/Constants/Dropdown.dart';
 import 'package:cl/Constants/location.dart';
 import 'package:cl/Screens/Drawers/Send_Package/LoadingPage.dart';
@@ -9,7 +8,6 @@ import 'package:cl/Screens/Drawers/Send_Package/SendPackage.dart';
 import 'package:cl/Screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../OnBoardingScreens/OnBoardingScreen.dart';
 
 bool loader = false;
@@ -39,7 +37,7 @@ class _OrderSummaryState extends State<OrderSummary> {
     final Map<String, dynamic> data = {
       "UID": storedUID,
       "P_name": SP_P_name,
-      "P_phone": SP_P_phone,
+      "P_phone": nameStorage.read('Contact'),
       "P_flat": pfflat,
       "P_area": paddress,
       "D_name": SP_D_name,
@@ -50,6 +48,7 @@ class _OrderSummaryState extends State<OrderSummary> {
       "weight": dropdownValue,
       "category": SP_category,
       "payment": SP_payment,
+      // "payment": 'Cash',
       "distance": money,
       "P_latitude": lat,
       "P_longitude": lon,
@@ -474,7 +473,10 @@ class _OrderSummaryState extends State<OrderSummary> {
                       GlobalAmount = roundedX;
                       if (SP_payment == 'Cash') {
                         postData1();
-                      } else if (SP_payment == 'Online') makePostRequest();
+                      } else if (SP_payment == 'Online') {
+                        // makePostRequest();
+                        postData1();
+                      }
 
                       // postData1();
                       Navigator.push(

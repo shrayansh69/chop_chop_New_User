@@ -1062,8 +1062,10 @@ class _Send_PackageState extends State<Send_Package> {
                       Receiver_address = sDaddress;
                       print(Sender_address);
                       print(Receiver_address);
+                      print(jsonEncode(paddress));
+                      print(jsonEncode(saddress));
                       final response = await http.get(Uri.parse(
-                          'https://chopchoplogistic.com/distance-api/api/distance?address1=$paddress&address2=$saddress'));
+                          'https://chopchoplogistic.com/distance-api/api/distance?address1="${Uri.encodeComponent(paddress)}"&address2=${Uri.encodeComponent(saddress)}'));
                       if (response.statusCode == 200) {
                         final dynamic data = json.decode(response.body);
                         money = data.toDouble(); // Convert int to double

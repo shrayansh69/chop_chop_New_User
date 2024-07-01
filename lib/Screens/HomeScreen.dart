@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -8,6 +9,7 @@ import 'package:cl/Screens/Drawers/Order_History/MainOrderHistory.dart';
 import 'package:cl/Screens/Drawers/Profile_.dart';
 import 'package:cl/Screens/Drawers/Send_Package/SendPackage.dart';
 import 'package:cl/Screens/SplashScreen.dart';
+import 'package:cl/notification.dart';
 import 'package:cl/version/version.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
@@ -89,6 +91,43 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchDataFromAPI2();
+    notoficationsServices.initialiseNotification(context);
+    Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      fetchDataFromAPI3();
+    });
+  }
+
+  NotoficationsServices notoficationsServices = NotoficationsServices();
+  Future<void> fetchDataFromAPI3() async {
+    try {
+      final response = await http.get(Uri.parse(
+          // 'https://chopchoplogistic.com/acceptedOrder/api/notification/OqEfIpMgDtKmTcN'));
+          'https://chopchoplogistic.com/acceptedOrder/api/notification/${nameStorage.read('uid')}'));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        if (response.body == '') {
+          print(response.body);
+        } else {
+          String header = jsonDecode(response.body)['Header'];
+          String template = jsonDecode(response.body)['Template'];
+          notoficationsServices.sendNotification(header, template);
+        }
+      } else {
+        print('Request failed with status1: ${response.statusCode}');
+        // Return a default value or throw an exception as needed
+        // or throw Exception('Failed to fetch data: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+      // Return a default value or throw an exception as needed
+      // or throw Exception('Failed to fetch data: $e');
+    }
+  }
+
   Future<void> fetchDataFromAPI2() async {
     final response =
         await http.get(Uri.parse('https://chopchoplogistic.com/api/api/list'));
@@ -96,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (response.statusCode == 200) {
       final responseData = (response.body);
       // print("hello");
-      if (responseData != '1.0.0+6') {
+      if (responseData != '1.0.0+7') {
         print("hello");
         // ignore: use_build_context_synchronously
         Navigator.push(
@@ -110,12 +149,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    fetchDataFromAPI2();
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
