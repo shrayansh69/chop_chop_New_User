@@ -9,12 +9,12 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
-  // runApp(MyApp());
-  runApp(DevicePreview(
-    builder: (context) {
-      return MyApp();
-    },
-  ));
+  runApp(MyApp());
+  // runApp(DevicePreview(
+  //   builder: (context) {
+  //     return MyApp();
+  //   },
+  // ));
 }
 
 class MyApp extends StatelessWidget {
